@@ -16,6 +16,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
     <None Remove="Repository\" />
     <None Remove="Models\ApiResponse\" />
     <None Remove="Models\Login\" />
+    <None Remove="Utility\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EFCore\" />
@@ -31,5 +33,6 @@
     <Folder Include="Repository\" />
     <Folder Include="Models\ApiResponse\" />
     <Folder Include="Models\Login\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
 </Project>
