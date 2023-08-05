@@ -43,6 +43,21 @@ namespace DigitalAssesment_EF.Repository
 
             return userModel;
         }
+        public bool isValidUser(string username ) 
+        {
+            try
+            {
+                var data = context.Users.Where(d => d.username.Equals(username)).FirstOrDefault();
+                if(data != null)
+                {
+                    return true;
+                }
+            }catch(Exception ex)
+            {
+                return false;
+            }
+            return false;
+        }
         public UserModel AuthenticateUSer(string username,string password)
         {
             var data = context.Users.Where(d => d.username.Equals(username) && d.password.Equals(password)).FirstOrDefault();

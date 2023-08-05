@@ -30,12 +30,18 @@ namespace DigitalAssesment_EF.Controllers
             _config = config;
         }
 
+
+        public bool isUserValid(string request)
+        {
+            string userId = Util.getUserByJwtToken(request);
+            return db.isValidUser(userId);
+        }
+
         [HttpGet]
         [Route("api/[controller]/GetUser")]
         public IActionResult Get()
         {
-            string userId = Util.getUserByJwtToken(Request.Headers.Authorization);
-            if (userId == null || !userId.Any())
+            if (!isUserValid(Request.Headers.Authorization))
             {
                 ApiResponse res = new ApiResponse();
                 res.Code = "400";
@@ -92,7 +98,7 @@ namespace DigitalAssesment_EF.Controllers
                     var authenticate = db.AuthenticateUSer(model.username, model.password);
                     response.id = data.id;
                     response.username = data.username;
-                    response.UserToken = Util.GenerateToken(model,_config);
+                    response.Jwt = Util.GenerateToken(model,_config);
                     return Ok(ResponseHandler.GetApiResponse(type, response));
                 }
                 catch (Exception e)

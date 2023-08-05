@@ -5,7 +5,7 @@ namespace DigitalAssesment_EF.Models.Login
 	{
 		public int id { get; set; }
 		public string username { get; set; }
-		public string UserToken { get; set; }
+		public string Jwt { get; set; }
 	}
 }
 
