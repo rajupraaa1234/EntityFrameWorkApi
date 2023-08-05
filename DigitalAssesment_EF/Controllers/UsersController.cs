@@ -70,18 +70,30 @@ namespace DigitalAssesment_EF.Controllers
         [Route("api/[controller]/Registration")]
         public IActionResult registration([FromBody] UserModel model)
         {
-            try
+            if (db.isValidUser(model.username))
             {
                 ResponseType type = ResponseType.Success;
-                db.saveUser(model);
-                return Ok(ResponseHandler.GetApiResponse(type, model));
-
+                ApiResponse response = new ApiResponse();
+                response.Code = "200";
+                response.Message = "User is already registered";
+                return Ok(ResponseHandler.GetApiResponse(type, response));
             }
-            catch (Exception ex)
+            else
             {
+                try
+                {
+                    ResponseType type = ResponseType.Success;
+                    db.saveUser(model);
+                    return Ok(ResponseHandler.GetApiResponse(type, model));
 
-                return BadRequest(ResponseHandler.GetExceptionResponse(ex));
+                }
+                catch (Exception ex)
+                {
+
+                    return BadRequest(ResponseHandler.GetExceptionResponse(ex));
+                }
             }
+          
         }
 
         [HttpPost]
