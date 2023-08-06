@@ -85,7 +85,6 @@ namespace DigitalAssesment_EF.Controllers
                     ResponseType type = ResponseType.Success;
                     db.saveUser(model);
                     return Ok(ResponseHandler.GetApiResponse(type, model));
-
                 }
                 catch (Exception ex)
                 {
