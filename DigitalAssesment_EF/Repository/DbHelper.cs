@@ -71,7 +71,7 @@ namespace DigitalAssesment_EF.Repository
         }
         public UserModel getUserById(Guid id)
         {
-            var data = context.Users.Where(d => d.id.Equals(id)).FirstOrDefault();
+            var data = context.Users.Find(id);
             UserModel userModel = new UserModel();
             userModel.id = data.id;
             userModel.username = data.username;
