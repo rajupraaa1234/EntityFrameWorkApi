@@ -69,6 +69,16 @@ namespace DigitalAssesment_EF.Repository
 
             return userModel;
         }
+        public UserModel getUserById(Guid id)
+        {
+            var data = context.Users.Where(d => d.id.Equals(id)).FirstOrDefault();
+            UserModel userModel = new UserModel();
+            userModel.id = data.id;
+            userModel.username = data.username;
+            userModel.password = data.password;
+
+            return userModel;
+        }
     }
 
 	

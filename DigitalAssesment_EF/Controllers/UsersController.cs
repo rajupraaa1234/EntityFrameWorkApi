@@ -65,6 +65,38 @@ namespace DigitalAssesment_EF.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/[controller]/GetUserById/{id:Guid}")]
+        public IActionResult GetUserById([FromRoute] Guid id)
+        {
+            try
+            {
+                LoginResponse response = new LoginResponse();
+                ResponseType type = ResponseType.Success;
+                var data = db.getUserById(id);
+                try
+                {
+                    response.id = data.id;
+                    response.username = data.username;
+                    return Ok(ResponseHandler.GetApiResponse(type, response));
+                }
+                catch (Exception e)
+                {
+                    ApiResponse res = new ApiResponse();
+                    res.Code = "200";
+                    res.Message = "User not found";
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                ApiResponse response = new ApiResponse();
+                response.Code = "200";
+                response.Message = "User not found";
+                return Ok(response);
+            }
+        }
+
         // POST api/values
         [HttpPost]
         [Route("api/[controller]/Registration")]
